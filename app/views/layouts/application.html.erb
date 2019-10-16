@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assignment</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <%= link_to('Home', root_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+              <%= link_to('Secret Codes', secret_codes_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+              <% if user_signed_in?%>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'nav-link') %>
+              <%else%>
+                <%= link_to('Login', new_user_session_path, class: 'nav-link') %>
+              <%end%>
+            </li>
+            <%# <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li> %>
+          </ul>
+        </div>
+      </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+  </body>
+</html>

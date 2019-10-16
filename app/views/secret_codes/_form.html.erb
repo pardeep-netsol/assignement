@@ -1,0 +1,22 @@
+<%= form_with(model: secret_code, local: true) do |form| %>
+  <% if secret_code.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(secret_code.errors.count, "error") %> prohibited this secret_code from being saved:</h2>
+
+      <ul>
+      <% secret_code.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :token_count %>
+    <%= form.select :token_count, options_for_select([ 10, 20, 30, 50, 100 ], 10)%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

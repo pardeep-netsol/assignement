@@ -1,0 +1,32 @@
+<h1>Secret Codes</h1>
+
+<%= link_to 'Show Used Codes', secret_codes_path(type: 'used'), class: 'btn btn-primary'%>
+<%= link_to 'Show Free Codes', secret_codes_path(type: 'free'), class: 'btn btn-primary'%>
+<%= link_to 'Show All Codes', secret_codes_path(type: 'All'), class: 'btn btn-primary'%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @secret_codes.each do |secret_code| %>
+      <tr>
+        <td><%= secret_code.token %></td>
+        <td><%= secret_code.user.blank? ? '-' : secret_code.user.email %></td>
+        <% if secret_code.user.blank? %>
+          <td><%= link_to 'Destroy', secret_code, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= paginate @secret_codes, window: 2 %>
+
+<%= render 'form', secret_code: @secret_code %>
